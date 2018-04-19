@@ -3,14 +3,14 @@
 
 #########################
 
-# change 'tests => 1' to 'tests => last_test_to_print';
 
 use strict;
 use warnings;
 
-use Test::Most tests => 2;
+use Test::Most tests => 5;
 
-use constant S_OKAY => 0;
+use constant S_OKAY => 0; # Operation successful
+use constant S_INVDB => 1000; # Invalid database
 
 BEGIN { use_ok('Database::Typhoon') };
 
@@ -19,4 +19,7 @@ BEGIN { use_ok('Database::Typhoon') };
 # Insert your test code below, the Test::More module is use()ed here so read
 # its man page ( perldoc Test::More ) for help writing this test script.
 
-isnt(Database::Typhoon::dt_d_open("foo", "s"), S_OKAY);
+is(Database::Typhoon::dt_d_open("foo", "s"), S_INVDB);
+is(Database::Typhoon::dt_d_dbdpath('../../osdb-typhoon/examples'), S_OKAY);
+is(Database::Typhoon::dt_d_dbfpath('../../osdb-typhoon/examples'), S_OKAY);
+is(Database::Typhoon::dt_d_open("demo", "x"), S_OKAY);
