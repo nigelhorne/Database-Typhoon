@@ -137,6 +137,13 @@ d_open(database, mode)
 		RETVAL
 
 int
+d_close()
+	CODE:
+		RETVAL = d_close();
+	OUTPUT:
+		RETVAL
+
+int
 d_fillnew(recid, buf)
 	unsigned long recid
 	HV *buf

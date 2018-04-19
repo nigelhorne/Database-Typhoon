@@ -6,7 +6,7 @@
 use strict;
 use warnings;
 
-use Test::Most tests => 18;
+use Test::Most tests => 19;
 
 BEGIN { use_ok('Database::Typhoon', ':all') };
 
@@ -54,3 +54,4 @@ is(Database::Typhoon::d_fillnew(ADDRESSES, $record), S_OKAY);
 is(Database::Typhoon::d_keyfrst(ALL), S_OKAY);
 is(Database::Typhoon::d_delete(), S_OKAY);
 is(Database::Typhoon::d_keyfrst(ALL), S_NOTFOUND);
+is(Database::Typhoon::d_close(), S_OKAY);
