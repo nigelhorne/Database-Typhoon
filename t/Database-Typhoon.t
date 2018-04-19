@@ -30,6 +30,7 @@ while(Database::Typhoon::d_keyfrst(ALL) == S_OKAY) {
 my $record = {
 	'lat' => 38.99516556,
 	'lon' => -77.09943963,
+	'number' => 0,
 	'street' => 'MEDLARS DR',
 	'city' => 'BETHESDA',
 	'county' => 'MONTGOMERY',
