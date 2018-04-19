@@ -7,7 +7,7 @@ WriteMakefile(
     VERSION_FROM      => 'lib/Database/Typhoon.pm', # finds $VERSION, requires EU::MM from perl >= 5.5
     PREREQ_PM         => {}, # e.g., Module::Name => 1.1
     ABSTRACT_FROM     => 'lib/Database/Typhoon.pm', # retrieve abstract from module
-    AUTHOR            => 'Nigel Horne <njh@fios-router.home>',
+    AUTHOR            => 'Nigel Horne <njh@bandsan.co.uk>',
     #LICENSE           => 'perl',
     #Value must be from legacy list of licenses here
     #http://search.cpan.org/perldoc?Module%3A%3ABuild%3A%3AAPI

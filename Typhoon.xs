@@ -9,6 +9,7 @@
 
 
 MODULE = Database::Typhoon		PACKAGE = Database::Typhoon		
+PROTOTYPES: DISABLE
 
 int
 dt_d_open(database, mode)
