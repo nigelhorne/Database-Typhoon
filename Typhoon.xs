@@ -13,7 +13,7 @@ PROTOTYPES: DISABLE
 
 int
 d_dbdpath(path)
-	const char *path
+	char *path
 
 	CODE:
 		RETVAL = d_dbdpath(path);
@@ -22,7 +22,7 @@ d_dbdpath(path)
 
 int
 d_dbfpath(path)
-	const char *path
+	char *path
 
 	CODE:
 		RETVAL = d_dbdpath(path);
@@ -31,10 +31,36 @@ d_dbfpath(path)
 
 int
 d_open(database, mode)
-	const char *database
-	const char *mode
+	char *database
+	char *mode
 
 	CODE:
 		RETVAL = d_open(database, mode);
+	OUTPUT:
+		RETVAL
+
+int
+d_fillnew(recid, buf)
+	unsigned long recid
+	void *buf
+
+	CODE:
+		RETVAL = d_fillnew(recid, buf);
+	OUTPUT:
+		RETVAL
+
+int
+d_keyfrst(keyid)
+	unsigned long keyid
+
+	CODE:
+		RETVAL = d_keyfrst(keyid);
+	OUTPUT:
+		RETVAL
+
+int
+d_delete()
+	CODE:
+		RETVAL = d_delete();
 	OUTPUT:
 		RETVAL
