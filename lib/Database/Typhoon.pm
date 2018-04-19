@@ -15,13 +15,23 @@ our @ISA = qw(Exporter);
 # This allows declaration	use Database::Typhoon ':all';
 # If you do not need this, moving things directly into @EXPORT or @EXPORT_OK
 # will save memory.
+
+use constant S_OKAY => 0; # Operation successful
+use constant S_NOTFOUND => 1; #* Key not found
+use constant S_DUPLICATE => 2; # Duplicate key found
+use constant S_INVDB => 1000; # Invalid database
+
 our %EXPORT_TAGS = ( 'all' => [ qw(
-	
+	S_OKAY
+	S_NOTFOUND
+	S_DUPLICATE
+	S_INVDB
 ) ] );
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw(
+
 	
 );
 

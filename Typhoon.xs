@@ -6,6 +6,7 @@
 #include "ppport.h"
 
 #include "typhoon.h"
+#include "examples/openaddresses.h"
 
 
 MODULE = Database::Typhoon		PACKAGE = Database::Typhoon		
@@ -42,9 +43,12 @@ d_open(database, mode)
 int
 d_fillnew(recid, buf)
 	unsigned long recid
-	void *buf
+	HV *buf
 
 	CODE:
+		/*
+		 * TODO: map the incoming hash to a struct
+		 */
 		RETVAL = d_fillnew(recid, buf);
 	OUTPUT:
 		RETVAL
@@ -62,5 +66,16 @@ int
 d_delete()
 	CODE:
 		RETVAL = d_delete();
+	OUTPUT:
+		RETVAL
+
+int
+d_recread(buf)
+	SV *buf;
+	CODE:
+		RETVAL = d_recread(buf);
+		/*
+		 * TODO: map the struct to an outgoing hash
+		 */
 	OUTPUT:
 		RETVAL

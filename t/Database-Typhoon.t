@@ -6,16 +6,12 @@
 use strict;
 use warnings;
 
-use Test::Most tests => 8;
+use Test::Most tests => 15;
 
-use constant S_OKAY => 0; # Operation successful
-use constant S_NOTFOUND => 1; #* Key not found
-use constant S_DUPLICATE => 2; # Duplicate key found
-use constant S_INVDB => 1000; # Invalid database
+BEGIN { use_ok('Database::Typhoon', ':all') };
+
 use constant ADDRESSES => 1000;
 use constant ALL => 0;
-
-BEGIN { use_ok('Database::Typhoon') };
 
 #########################
 
@@ -23,7 +19,7 @@ BEGIN { use_ok('Database::Typhoon') };
 # its man page ( perldoc Test::More ) for help writing this test script.
 
 is(Database::Typhoon::d_open("foo", "s"), S_INVDB);
-is(Database::Typhoon::d_dbdpath('examples'), S_OKAY);
+is(Database::Typhoon::d_dbdpath('examples'), Database::Typhoon::S_OKAY);
 is(Database::Typhoon::d_dbfpath('examples'), S_OKAY);
 is(Database::Typhoon::d_open("openaddresses", "s"), S_OKAY);
 
@@ -37,9 +33,21 @@ my $record = {
 	'street' => 'MEDLARS DR',
 	'city' => 'BETHESDA',
 	'county' => 'MONTGOMERY',
+	'state' => 'MD',
+	'country' => 'US',
 	'postcode' => 20894,
 };
 
 is(Database::Typhoon::d_fillnew(ADDRESSES, $record), S_OKAY);
 is(Database::Typhoon::d_fillnew(ADDRESSES, $record), S_DUPLICATE);
 is(Database::Typhoon::d_fillnew(ADDRESSES, $record), S_DUPLICATE);
+is(Database::Typhoon::d_keyfrst(ALL), S_OKAY);
+# my $rc;
+# is(Database::Typhoon::d_recread($rc), S_OKAY);
+# diag(Data::Dumper->new([$rc])->Dump());
+is(Database::Typhoon::d_delete(), S_OKAY);
+is(Database::Typhoon::d_keyfrst(ALL), S_NOTFOUND);
+is(Database::Typhoon::d_fillnew(ADDRESSES, $record), S_OKAY);
+is(Database::Typhoon::d_keyfrst(ALL), S_OKAY);
+is(Database::Typhoon::d_delete(), S_OKAY);
+is(Database::Typhoon::d_keyfrst(ALL), S_NOTFOUND);
