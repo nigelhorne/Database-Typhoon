@@ -12,7 +12,7 @@ MODULE = Database::Typhoon		PACKAGE = Database::Typhoon
 PROTOTYPES: DISABLE
 
 int
-dt_d_dbdpath(path)
+d_dbdpath(path)
 	const char *path
 
 	CODE:
@@ -21,7 +21,7 @@ dt_d_dbdpath(path)
 		RETVAL
 
 int
-dt_d_dbfpath(path)
+d_dbfpath(path)
 	const char *path
 
 	CODE:
@@ -30,7 +30,7 @@ dt_d_dbfpath(path)
 		RETVAL
 
 int
-dt_d_open(database, mode)
+d_open(database, mode)
 	const char *database
 	const char *mode
 
