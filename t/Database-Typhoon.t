@@ -6,7 +6,7 @@
 use strict;
 use warnings;
 
-use Test::Most tests => 15;
+use Test::Most tests => 18;
 
 BEGIN { use_ok('Database::Typhoon', ':all') };
 
@@ -43,9 +43,11 @@ is(Database::Typhoon::d_fillnew(ADDRESSES, $record), S_OKAY);
 is(Database::Typhoon::d_fillnew(ADDRESSES, $record), S_DUPLICATE);
 is(Database::Typhoon::d_fillnew(ADDRESSES, $record), S_DUPLICATE);
 is(Database::Typhoon::d_keyfrst(ALL), S_OKAY);
-# my $rc;
-# is(Database::Typhoon::d_recread($rc), S_OKAY);
+my $rc = {};
+is(Database::Typhoon::d_recread(ADDRESSES, $rc), S_OKAY);
 # diag(Data::Dumper->new([$rc])->Dump());
+ok($rc->{'lat'} == 38.99516556);
+ok($rc->{'street'} eq 'MEDLARS DR');
 is(Database::Typhoon::d_delete(), S_OKAY);
 is(Database::Typhoon::d_keyfrst(ALL), S_NOTFOUND);
 is(Database::Typhoon::d_fillnew(ADDRESSES, $record), S_OKAY);
