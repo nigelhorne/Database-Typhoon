@@ -44,7 +44,7 @@ is(Database::Typhoon::d_fillnew(ADDRESSES, $record), S_DUPLICATE);
 is(Database::Typhoon::d_fillnew(ADDRESSES, $record), S_DUPLICATE);
 is(Database::Typhoon::d_keyfrst(ALL), S_OKAY);
 my $rc = {};
-is(Database::Typhoon::d_recread(ADDRESSES, $rc), S_OKAY);
+is(Database::Typhoon::d_recread($rc), S_OKAY);
 # diag(Data::Dumper->new([$rc])->Dump());
 ok($rc->{'lat'} == 38.99516556);
 ok($rc->{'street'} eq 'MEDLARS DR');

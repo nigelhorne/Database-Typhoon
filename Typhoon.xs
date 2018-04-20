@@ -187,37 +187,41 @@ d_delete()
 	OUTPUT:
 		RETVAL
 
- # Note extra argument: recid
 int
-d_recread(recid, buf)
-	unsigned long recid
+d_recread(buf)
 	HV *buf;
+	INIT:
+		DB_ADDR d;
 	CODE:
-		switch(recid) {
+		RETVAL = d_crget(&d);
+
+		if(RETVAL == S_OKAY) switch(d.recid) {
 			case ADDRESSES: {
 				struct addresses a;
 
 				RETVAL = d_recread(&a);
-				/*
-				 * TODO:
-				 *	Use hv_store to copy the fields
-				 *	from a into buf
-				 */
-				if(buf == NULL) {
-					buf = newHV();
+				if(RETVAL == S_OKAY) {
+					/*
+					 * TODO:
+					 *	Use hv_store to copy the fields
+					 *	from a into buf
+					 */
+					if(buf == NULL) {
+						buf = newHV();
+					}
+					set_double(buf, "lat", a.lat);
+					set_double(buf, "lon", a.lon);
+					set_long(buf, "number", a.number);
+					set_string(buf, "street", a.street);
+					set_string(buf, "city", a.city);
+					set_string(buf, "county", a.county);
+					set_string(buf, "state", a.state);
+					set_string(buf, "country", a.country);
+					break;
 				}
-				set_double(buf, "lat", a.lat);
-				set_double(buf, "lon", a.lon);
-				set_long(buf, "number", a.number);
-				set_string(buf, "street", a.street);
-				set_string(buf, "city", a.city);
-				set_string(buf, "county", a.county);
-				set_string(buf, "state", a.state);
-				set_string(buf, "country", a.country);
-				break;
 			}
 			default:
-				fprintf(stderr, "Unknown recid %lu\n", recid);
+				fprintf(stderr, "Unknown recid %lu\n", d.recid);
 				RETVAL = S_INVREC;
 		}
 	OUTPUT:
