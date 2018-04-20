@@ -49,7 +49,7 @@ get_double(HV *hash, const char *field)
 		return 0.0;
 	}
 	if(!SvOK(*sv)) {
-		fprintf(stderr, "Error trying to get 'field'\n", field);
+		fprintf(stderr, "Error trying to get '%s'\n", field);
 		return 0.0;
 	}
 	return SvNV(*sv);
@@ -81,7 +81,7 @@ get_long(HV *hash, const char *field)
 		return 0L;
 	}
 	if(!SvOK(*sv)) {
-		fprintf(stderr, "Error trying to get 'field'\n", field);
+		fprintf(stderr, "Error trying to get '%s'\n", field);
 		return 0L;
 	}
 	return SvIV(*sv);
